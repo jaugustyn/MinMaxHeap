@@ -34,13 +34,7 @@ public class MinMaxHeap<T> where T : IComparable<T>
         return result;
     }
     private static bool IsGrandchild(int node, int grandchild) => grandchild > 2 && ((grandchild - 1) / 2 - 1) / 2 == node;
-    private static bool IsMinLevelIndex(int index)
-    {
-        // For all Min levels, value (index + 1) has the leftmost bit set to '1' at even position.
-        const uint minLevelsBits = 0x55555555;
-        const uint maxLevelsBits = 0xAAAAAAAA;
-        return ((index + 1) & minLevelsBits) > ((index + 1) & maxLevelsBits);
-    }
+    private static bool IsMinLevelIndex(int index) => ((index + 1) & 0x55555555) > ((index + 1) & 0xAAAAAAAA); // Explanation - https://stackoverflow.com/questions/43923906/what-are-0xaa-and-0x55-doing
 
     public MinMaxHeap()
     {
